@@ -14,7 +14,7 @@
 
 <html>
   <head>
-    <title>Getting Started With Django</title>
+    <title>Introduction to Django</title>
 
     <meta charset='utf-8'>
     <script src='slides.js'></script>
@@ -57,16 +57,17 @@
       
       <article class="logo">
         <h1 style="margin-top: 120px">
-          Getting Started With
+          Introduction to
+          <br>
           <img src="images/django-logo-negative.png" width="250" alt="Django" style="padding-top: 20px;">
         </h1>
         <p>
           <br>
-          Kevin Grinberg &amp; John Obelenus
+          Kevin Grinberg
           <br>
           @activefrequency
           <br><br>
-          May 24, 2011
+          October 16, 2012
         </p>
       </article>
       
@@ -78,7 +79,7 @@
         </p>
         <a href="http://docs.djangoproject.com">http://docs.djangoproject.com</a>
         <p class="padded">
-          (Examples shamelessly stolen from official tutorial*)
+          (Some examples shamelessly stolen from official tutorial*)
         </p>
         <p class="padded">
           * which this is not.
@@ -105,7 +106,7 @@
         
         <ul>
           <li> Python</li>
-          <li> Database (MySQL, PostgreSQL, SQLite, etc.)</li>
+          <li> Database (PostgreSQL, MySQL, SQLite, etc.)</li>
           <li> Libraries (Django + dependencies)</li>
         </ul>
       </article>
@@ -129,7 +130,8 @@
       </article>
 
       <article>
-        <h1>Philosophy</h1>
+        <img src="images/thinker.jpg" width="200" alt="The Thinker (Rodin)" style="float: right; margin-right: 50px; margin-top: 50px;">
+        <h1 style="float: left;">Philosophy</h1>
       </article>
       
       <article>
@@ -138,7 +140,7 @@
         <ul>
           <li> DRY</li>
           <li> Loose coupling</li>
-          <li> Explicit is better than implicit (<b>limited</b> magic)</li>
+          <li> Explicit is better than implicit (<b>limited</b> <strike>magic</strike> delight)</li>
         </ul>
       </article>
       
@@ -187,12 +189,14 @@
         </div>
         <div class="build">
           <p>Just Python modules!</p>
-          <pre>
+          <pre class="crop-top">
 mysite/
-    __init__.py
     manage.py
-    settings.py
-    urls.py
+    mysite/
+      __init__.py
+      settings.py
+      urls.py
+      wsgi.py
     myapp/
       __init__.py
       models.py
@@ -336,7 +340,6 @@ def posts_by_month(request, month, year):
       <article>
         <h2 class="static">Views</h2>
         
-        <p>views.py</p>
         <pre class="crop-top">
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -352,8 +355,16 @@ def view_post(request, post_id):
         {'post': p },
         context_instance=RequestContext(request))
 </pre>
+<div class="build">
+        <pre class="crop-top">
+from django.shortcuts import get_object_or_404, render
+
+def view_post(request, post_id):
+    p = get_object_or_404(Post, pk=post_id)
+    return render(request, 'myapp/post.html', {'post': p })
+</pre>
+</div>
       </article>
-      
       
       <article>
         <h2 class="static">Templates</h2>
@@ -438,6 +449,7 @@ def view_post(request, post_id):
 
       </article>
 
+<!--
       <article>
         <h2 class="static">Forms</h2>
         <p>forms.py</p>
@@ -453,7 +465,7 @@ class ArchiveForm(forms.Form):
         <pre class="crop-top">
 &lt;form action="{{ url }}" method="POST"&gt;
     &lt;ul&gt;
-        {{ form.as_ul }} {# form.as_table #} {# form.as_p #}
+        {{ form.as_ul }}
     &lt;/ul&gt;
     &lt;input type="submit"&gt;
 &lt;/form&gt;
@@ -563,6 +575,11 @@ class CommentForm(forms.ModelForm):
         fields = ('name', 'email', 'body')
 </pre>
         </div>
+      </article>
+-->
+
+      <article>
+        <h1 class="static">Admin</h2>
       </article>
 
       <article>
@@ -682,6 +699,8 @@ def analytics(request):
         Schema Migration
         <br><br>
         <a href="http://south.aeracode.org">http://south.aeracode.org</a>
+        <br><br>
+        * Going to Django core soon.
       </article>
 
       <article>
@@ -700,9 +719,14 @@ def analytics(request):
         <h2 class="static">Deployment</h2>
         
         <ul>
-          <li> Apache/WSGI</li>
-          <li> Fabric</li>
-          <li> <a href="http://www.djangozoom.com">http://www.djangozoom.com</a></li>
+          <li> Apache/WSGI + Fabric</li>
+          <li> PaaS:<br>
+            <ul>
+              <li> <a href="http://www.gondor.io">Gondor.io</a></li>
+              <li> <a href="http://www.heroku.com">Heroku</a></li>
+              <li> <a href="http://aws.amazon.com/elasticbeanstalk/">AWS Elastic Beanstalk</a></li>
+            </ul>
+          </li>
         </ul>
       </article>
 
@@ -711,6 +735,7 @@ def analytics(request):
         
         <ul class="build">
           <li> Test framework</li>
+          <li> Forms</li>
           <li> Logging</li>
           <li> Sessions</li>
           <li> i18n/l10n</li>
@@ -718,6 +743,17 @@ def analytics(request):
           <li> Messages</li>
           <li> CSRF</li>
         </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Next Steps</h2>
+        
+        <ul>
+          <li> <a href="https://docs.djangoproject.com">docs.djangoproject.com</a> </li>
+          <li> <a href="http://www.gettingstartedwithdjango.com">www.gettingstartedwithdjango.com</a> </li>
+        </ul>
+        
+        <img src="images/gswd.png" alt="GSWD" style="float: left; margin-top: 100px;">
       </article>
 
       <article>
