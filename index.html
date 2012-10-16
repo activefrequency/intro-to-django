@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>Getting Started With Django</title>
+
+    <meta charset='utf-8'>
+    <script src='slides.js'></script>
+  </head>
+  
+  <style>
+
+    .slides.template-af > article:not(.nobackground):not(.biglogo) {
+      background: white;
+    }
+    
+    .slides.template-af > article.logo:not(.nobackground):not(.biglogo) {
+      background: url(images/af-logo-small.png) 710px 625px no-repeat;  
+      background-color: white;  
+    }
+    
+    .padded {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+    
+    .padded-mini {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+    
+    .crop-top {
+        margin-top: 10px;
+    }
+
+    .static {
+      position: static;
+    }
+    
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-af'>
+      
+      <article class="logo">
+        <h1 style="margin-top: 120px">
+          Getting Started With
+          <img src="images/django-logo-negative.png" width="250" alt="Django" style="padding-top: 20px;">
+        </h1>
+        <p>
+          <br>
+          Kevin Grinberg &amp; John Obelenus
+          <br>
+          @activefrequency
+          <br><br>
+          May 24, 2011
+        </p>
+      </article>
+      
+      <article>
+        <h2 class="static">Preface</h2>
+        
+        <p class="padded">
+          Django docs = killer feature
+        </p>
+        <a href="http://docs.djangoproject.com">http://docs.djangoproject.com</a>
+        <p class="padded">
+          (Examples shamelessly stolen from official tutorial*)
+        </p>
+        <p class="padded">
+          * which this is not.
+        </p>
+
+      </article>
+      
+      <article>
+        <img src="images/python-logo.png" width="400" alt="Python">
+        
+        <ul>
+          <li> <a href="http://docs.python.org/tutorial/">http://docs.python.org/tutorial/</a> </li>
+          <li> <a href="http://learnpythonthehardway.org">http://learnpythonthehardway.org</a> </li>
+          <li> <a href="http://diveintopython.org">http://diveintopython.org</a> </li>
+        </ul>
+      </article>
+      
+      <article>
+        <h2 class="static">Environment</h2>
+        
+        <br>
+        <a href="http://docs.djangoproject.com/en/dev/intro/install/">http://docs.djangoproject.com/en/dev/intro/install/</a>
+        <br>
+        
+        <ul>
+          <li> Python</li>
+          <li> Database (MySQL, PostgreSQL, SQLite, etc.)</li>
+          <li> Libraries (Django + dependencies)</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Surprise!</h2>
+        
+        <div class="build padded">
+          <p class="padded">Built-in <b>development*</b> web server</p>
+          <code class="padded">
+            $ python manage.py runserver
+          </code>
+          <p class="padded"><b>*</b> not for production!</p>
+        </div>
+      </article>
+      
+      <article>
+        <h1>virtualenv</h1>
+        <br>
+        <a href="http://www.virtualenv.org/">http://www.virtualenv.org/</a>
+      </article>
+
+      <article>
+        <h1>Philosophy</h1>
+      </article>
+      
+      <article>
+        <h2 class="static">Philosophy</h2>
+        <br>
+        <ul>
+          <li> DRY</li>
+          <li> Loose coupling</li>
+          <li> Explicit is better than implicit (<b>limited</b> magic)</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h1>Building Blocks</h1>
+      </article>
+
+      <article>
+        <h2 class="static">Project</h2>
+        <p>
+          "...collection of configuration and apps for a particular Web site"
+        </p>
+        <br>
+
+        <h2 class="static">App</h2>
+        <p>
+          Distinct unit of functionality
+        </p>
+        <br>
+        
+        <h3>myproject</h3>
+          <ul style="margin-top: 10px;">
+            <li> my_awesome_app</li>
+            <li>django-registration</li>
+            <li>django.contrib.admin</li>
+            <li> . . .</li>
+          </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Creating Projects &amp; Apps</h2>
+        <div class="padded-mini">
+          <code>
+            $ python django-admin.py startproject mysite
+          </code>
+          <br>
+
+          <code>
+            $ cd mysite
+          </code>
+          <br>
+
+          <code>
+            $ python manage.py startapp myapp
+          </code>
+        </div>
+        <div class="build">
+          <p>Just Python modules!</p>
+          <pre>
+mysite/
+    __init__.py
+    manage.py
+    settings.py
+    urls.py
+    myapp/
+      __init__.py
+      models.py
+      tests.py
+      views.py</pre>
+        </div>
+      </article>
+
+
+      <article>
+        <h2 class="static">"MTV"</h2>
+        <div class="build padded">
+          <div>
+            <img src="images/mtv-logo.png" width="100" alt="MTV">
+            <span style="font-size: 80px; position: relative; top: -6px; left: 5px;">?</span>
+          </div>
+          <ul>
+            <li> Model</li>
+            <li> Template</li>
+            <li> View</li>
+          </ul>
+        </div>
+      </article>
+      
+      <article>
+        <h2 class="static">Models</h2>
+        <ul class="padded">
+          <li> Object</li>
+          <li> (Usually) maps to DB table</li>
+          <li> Implicit <b>id</b> field</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Models</h2>
+        <p>
+          models.py
+        </p>
+        <pre class="crop-top">
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    body = models.TextField('Post Body')
+    pub_date = models.DateTimeField('Date Published',
+                                    auto_now_add=True)
+
+    def __unicode__(self):
+        return self.title
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Models</h2>
+
+        <p>Creating the Database</p>
+        
+        <p class="padded-mini">
+          <code>$ python manage.py syncdb</code>
+        </p>
+      </article>
+
+      <article>
+        <h2 class="static">Models</h2>
+
+        <p>In the shell</p>
+
+        <p class="padded-mini">
+          <code>$ python manage.py shell</code>
+        </p>
+
+        <pre>
+>>> from myapp.models import Post
+>>> from datetime import datetime
+>>> p = Post(title='New Post')
+>>> p.body = 'Lorem Ipsum'
+>>> p.save()
+>>> p2 = Post.objects.get(id=1)
+>>> p3 = Post.objects.get(title='New Post')
+>>> posts = Post.objects.filter(pub_date__gte=datetime(2011, 1, 1)
+>>> posts = posts.filter(title__contains='Django')
+>>> print posts
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Request Lifecycle</h2>
+        <ul class="padded-mini">
+          <li> Web server (Apache/nginx/etc.)</li>
+          <li> WSGI, FastCGI</li>
+          <li> Django
+            <ul class="padded-mini build">
+              <li> URLconf</li>
+              <li> view(request)</li>
+              <li> Response</li>
+          </li>
+        </ul>
+      </article>
+      
+      <article>
+        <h2 class="static">URLconf</h2>
+
+        <p>urls.py</p>
+        <pre class="crop-top">
+from django.conf.urls.defaults import *
+from myapp import views
+
+urlpatterns = patterns('',
+    (r'^about/$', views.about),
+    (r'^blog/post/(\d+)/$', views.view_post, name="post"),
+    (r'^blog/by-month/(?P&lt;year&gt;\d{4})/(?P&lt;month&gt;\d{2})/$', 
+        views.posts_by_month, name='posts_by_month'),
+    (r'^blog/post/(\d+)/post-comment/$', views.post_comment),
+)
+</pre>
+      </article>
+        
+      <article>
+        <h2 class="static">Views</h2>
+        
+        <p>views.py</p>
+        <pre class="crop-top">
+from django.http import HttpResponse
+
+def about(request):
+    return HttpResponse("Hello World")
+</pre>
+        <div class="build">
+          <pre class="crop-top">
+def view_post(request, post_id):
+    return HttpResponse("Post %d" % post_id)
+</pre>
+
+          <pre class="crop-top">
+def posts_by_month(request, month, year):
+    return HttpResponse("Posts for %d/%d" % (year, month,))
+</pre>
+        </div>
+      </article>
+      
+      <article>
+        <h2 class="static">Views</h2>
+        
+        <p>views.py</p>
+        <pre class="crop-top">
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.http import Http404
+from myapp.models import Post
+
+def view_post(request, post_id):
+    try:
+        p = Post.objects.get(pk=post_id)
+    except Post.DoesNotExist:
+        raise Http404
+    return render_to_response('myapp/post.html',
+        {'post': p },
+        context_instance=RequestContext(request))
+</pre>
+      </article>
+      
+      
+      <article>
+        <h2 class="static">Templates</h2>
+        
+        <ul class="padded">
+          <li> Take a <b>Context</b> with variables</li>
+          <li> Sandboxed</li>
+          <li> Auto-escaped</li>
+          <li> Live with app: <b>myapp/templates/myapp/...</b></li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Templates</h2>
+        
+        <p>post.html</p>
+        <pre class="crop-top">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;{{ post.title }}&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;{{ post.title }}&lt;/h1&gt;
+        &lt;h3&gt;{{ post.pub_date }}&lt;/h3&gt;
+        &lt;p&gt;{{ post.body }}&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Templates: Filters</h2>
+
+        <p>post.html</p>
+        <pre class="crop-top">
+&lt;h1&gt;{{ post.title<b>|upper</b> }}&lt;/h1&gt;
+</pre>
+
+        <pre>
+&lt;h3&gt;{{ post.pub_date<b>|date:"m/d/Y"</b> }}&lt;/h3&gt;
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Templates: Tags</h2>
+
+        <p>post.html</p>
+        <pre class="crop-top">
+{% if post.id == 1 %}
+    This is the first post!
+{% endif %}
+</pre>
+
+        <ul>
+          <li> <b>Some</b> logic/flow</li>
+          <li> Can use/manipulate variables</li>
+          <li> Can write your own</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Templates: Inheritance</h2>
+        
+        <p>base.html</p>
+        <pre class="crop-top">
+&lt;html&gt;
+    &lt;head&gt;&lt;title&gt;{% block title %}My Site{% endblock %}&lt;/title&gt;&lt;/head&gt;
+    &lt;body&gt;
+        {% block content %}{% endblock %}
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+        <p>page.html</p>
+        <pre class="crop-top">
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Page Title{% endblock %}
+{% block content %}
+    &lt;p&gt;Some content.&lt;/p&gt;
+{% endblock %}
+</pre>
+
+      </article>
+
+      <article>
+        <h2 class="static">Forms</h2>
+        <p>forms.py</p>
+        <div class="build">
+        <pre class="crop-top">
+from django import forms
+
+class ArchiveForm(forms.Form):
+    year = forms.ChoiceField(choices=range(2009, 2013), empty_label=None)
+    month = forms.ChoiceField(choices=range(1,13), empty_label=None)
+</pre>
+        <p>sidebar_archive.html</p>
+        <pre class="crop-top">
+&lt;form action="{{ url }}" method="POST"&gt;
+    &lt;ul&gt;
+        {{ form.as_ul }} {# form.as_table #} {# form.as_p #}
+    &lt;/ul&gt;
+    &lt;input type="submit"&gt;
+&lt;/form&gt;
+</pre>
+        </div>
+      </article>
+
+      <article>
+        <h2 class="static">Forms</h2>
+        <p>views.py</p>
+        <pre class="crop-top">
+from myapp.forms import ArchiveForm
+from django.core.urlresolvers import reverse
+from django.http import Http404, HttpResponseRedirect
+
+def redirect_to_archive(request):
+    if request.method == "POST":
+        archive_form = ArchiveForm(data=request.POST)
+        if archive_form.is_valid():
+            year = archive_form.cleaned_data.get('year')
+            month = archive_form.cleaned_data.get('month')
+            return HttpResponseRedirect(reverse('posts_by_month',
+                args={'year': year, 'month': month}))
+        else:
+            raise Http404
+    else:
+        return HttpResponseRedirect("/")
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">ModelForms</h2>
+
+        <p>models.py</p>
+        <div class="build">
+        <pre class="crop-top">
+class Comment(models.Model):
+    created_on = models.DateField(auto_now_add=True)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    body = models.TextField()
+    post = models.ForeignKey('Post')
+</pre>
+        <p>forms.py</p>
+        <pre class="crop-top">
+from django import forms
+from myapp.models import Comment
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
+</pre>
+        </div>
+      </article>
+
+      <article>
+        <h2 class="static">ModelForms</h2>
+        <p>views.py</p>
+        <div class="build">
+        <pre class="crop-top">
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
+from myapp.forms import CommentForm
+from myapp.models import Comment, Post
+
+def post_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        comment = Comment(post=post)
+        comment_form = CommentForm(instance=comment, 
+            data=request.POST)
+        if comment_form.is_valid():
+            comment_form.save()
+            return HttpResponseRedirect(reverse('post',
+                args=[post_id])
+    else:
+        return HttpResponseBadRequest()</pre>
+        </div>
+      </article>
+
+      <article>
+        <h2 class="static">ModelForms</h2>
+        <div class="build">
+        <pre class="crop-top">
+from django import forms
+from myapp.models import Comment
+from datetime import datetime, timedelta
+
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(
+        attrs={'rows': 5, 'cols': 40}))
+  
+    def clean(self):
+        email = self.cleaned_data.get(email)
+        one_minute_ago = datetime.now() - timedelta(minutes=1)
+        recent_comments = Comment.objects.filter(email=email,
+            created_on__gte=one_minute_ago)
+        if recent_comments.count() > 0:
+            raise forms.ValidationError('You talk too much!')
+        return self.cleaned_data
+  
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
+</pre>
+        </div>
+      </article>
+
+      <article>
+        <h2 class="static">Admin</h2>
+        
+        <p>admin.py</p>
+        <pre class="crop-top">
+from myapp.models import Post, Comment
+from django.contrib import admin
+
+admin.site.register(Post)
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_on')
+    list_filter = ('post', )
+    search_fields = ('name', 'email')
+admin.site.register(Comment, CommentAdmin)
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Admin</h2>
+        <br>
+        <img src="images/admin-1.png" width="700" alt="Admin" style="border: 1px solid #BBBBBB;">
+
+        <p>Override-able ModelForm</p>
+      </article>
+
+      <article>
+        <h2 class="static">Admin</h2>
+        
+        <br>
+        <img src="images/admin-2.png" width="700" alt="Admin" style="border: 1px solid #BBBBBB;">
+        
+        <p>Filter, Search, etc.</p>
+      </article>
+
+      <article>
+        <h1>I Wish I Knew...</h1>
+      </article>
+
+      <article>
+        <h2 class="static">Debugging</h2>
+        <br>
+        
+        <div class="build">
+          <div>
+            <p>django-debug-toolbar</p>
+            <br>
+            <img src="images/debug-toolbar.png" width="800" alt="Debug Toolbar" style="border: 1px solid #BBBBBB;">
+          </div>
+        </div>
+      </article>
+
+      <article>
+        <h2 class="static">Debugging</h2>
+        <br>
+        
+        <p>django-extensions</p>
+        
+        <pre>
+$ python manage.py <b>shell_plus</b>
+From 'auth' autoload: Permission, Group, User, Message
+From 'contenttypes' autoload: ContentType
+From 'sessions' autoload: Session
+From 'sites' autoload: Site
+From 'myapp' autoload: Post, Comment
+From 'admin' autoload: LogEntry
+>>> 
+</pre>
+    
+        <p>
+          Also: create_superuser, print_user_for_session, etc.
+        </p>
+
+      </article>
+
+      <article>
+        <h2 class="static">settings.py</h2>
+        
+        <br>
+        <p>It's Python!</p>
+<pre>
+import os
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Context Processors</h2>
+<pre>
+from django.conf import settings
+
+def analytics(request):
+    return {'ANALYTICS_CODE': settings.ANALYTICS_CODE,
+            'ANALYTICS_DOMAIN': settings.ANALYTICS_DOMAIN,
+           }
+</pre>
+      </article>
+
+      <article>
+        <h2 class="static">Middleware</h2>
+        <img src="images/middleware.png" width="600" alt="Middleware" style="padding-top: 40px;">
+      </article>
+
+      <article>
+        <h2 class="static">Transactions</h2>
+        <ul>
+          <li> Default: implicit per-request</li>
+          <li> But can override!</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">South</h2>
+        <br><br>
+        Schema Migration
+        <br><br>
+        <a href="http://south.aeracode.org">http://south.aeracode.org</a>
+      </article>
+
+      <article>
+        <h2 class="static">Contrib/Pluggable Apps</h2>
+        
+        <ul>
+          <li> django.contrib.* (flatpages, sessions, sitemaps, ...)</li>
+          <li> PyPI: django-*</li>
+          <li> <a href="http://djangopackages.com">http://djangopackages.com</a></li>
+          <li> <a href="http://pinaxproject.com">http://pinaxproject.com</a></li>
+          <li> <a href="http://djangosnippets.com">http://djangosnippets.com</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">Deployment</h2>
+        
+        <ul>
+          <li> Apache/WSGI</li>
+          <li> Fabric</li>
+          <li> <a href="http://www.djangozoom.com">http://www.djangozoom.com</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h2 class="static">And There's More...</h2>
+        
+        <ul class="build">
+          <li> Test framework</li>
+          <li> Logging</li>
+          <li> Sessions</li>
+          <li> i18n/l10n</li>
+          <li> Cache framework</li>
+          <li> Messages</li>
+          <li> CSRF</li>
+        </ul>
+      </article>
+
+      <article>
+        <h1 style="width: 300px; float: left;">Thanks!</h1>
+        <img src="images/django-pony.png" alt="Pony" style="float: left; margin-top: 100px;">
+      </article>
+
+    </section>
+
+  </body>
+</html>
